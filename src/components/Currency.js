@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import { AppContext } from '../context/AppContext';
 const Budget = () => {
     const { currency } = useContext(AppContext);
@@ -27,21 +28,32 @@ const Budget = () => {
 
     return (
         <div className='alert alert-secondary'>
-            <div class="dropdown">
-                <button class="btn btn-success dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-mdb-toggle="dropdown"
-                    aria-expanded="false">    
-                    {getCurrency()}
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li class="dropdown-item" href="#" >$ Dollar</li>
-                    <li class="dropdown-item" href="#" >£ Pound</li>
-                    <li class="dropdown-item" href="#" >€ Euro</li>
-                    <li class="dropdown-item" href="#" >₹ Ruppee</li>
-                </ul>
-            </div>
+            <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ backgroundColor: 'lightgreen', color: 'white' }}>
+                    <button class="btn" style={{ backgroundColor: 'lightgreen', color: 'white' }}
+                        type="button">    
+                        {getCurrency()}
+                    </button>
+                </Dropdown.Toggle>
+                <Dropdown.Menu style={{ backgroundColor: 'lightgreen' }}>
+                    <Dropdown.Item class="dropdown-item" href="#" onClick={() => dispatch({
+            type: 'CHG_CURRENCY',
+            payload: '$',
+        })}>$ Dollar</Dropdown.Item>
+                    <Dropdown.Item class="dropdown-item" href="#" onClick={() => dispatch({
+            type: 'CHG_CURRENCY',
+            payload: '£',
+        })}>£ Pound</Dropdown.Item>
+                    <Dropdown.Item class="dropdown-item" href="#" onClick={() => dispatch({
+            type: 'CHG_CURRENCY',
+            payload: '€',
+        })}>€ Euro</Dropdown.Item>
+                    <Dropdown.Item class="dropdown-item" href="#" onClick={() => dispatch({
+            type: 'CHG_CURRENCY',
+            payload: '₹',
+        })}>₹ Ruppee</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
         </div>
     );
 };
